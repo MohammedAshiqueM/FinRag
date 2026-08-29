@@ -1,5 +1,5 @@
 from backend.apps.ai.embedding.base import BaseEmbedding
-from backend.finrag.settings import EMBEDDING_PROVIDER
+from backend.finrag.settings import EMBEDDING_MODEL
 from sentence_transformers import SentenceTransformer
 
 class SentenceTransformerEmbedding(BaseEmbedding):
@@ -14,7 +14,7 @@ class SentenceTransformerEmbedding(BaseEmbedding):
         Initialize the SentenceTransformer model.
         """
         self.model = SentenceTransformer(
-            EMBEDDING_PROVIDER
+            EMBEDDING_MODEL
         )
     
     def embed(self, texts):

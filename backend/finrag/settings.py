@@ -118,4 +118,5 @@ STATIC_URL = 'static/'
 
 LLM_PROVIDER = 'ollama'
 EMBEDDING_PROVIDER = "sentence-transformers"
+EMBEDDING_MODEL = "all-MiniLM-L6-v2"
 VECTOR_DB = 'chromadb'

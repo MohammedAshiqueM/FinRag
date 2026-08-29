@@ -1,19 +1,48 @@
-import PyPDF2
+from pathlib import Path
+
+import fitz
+from django.utils import timezone
+
+from backend.apps.ingestion.services.parser import ParsedDocument
 from backend.apps.ingestion.services.parser.base import BaseParser
+from backend.apps.ingestion.services.parser.exceptions import ParserError
+
 
 class PDFParser(BaseParser):
     """
-    Concrete implementation for parsing PDF files using PyPDF2.
+    Parser for PDF files,
+    It extracts the data from the file using PyMuPDF, return text, metadata, pages as object of ParsedDocument
     """
-    def extract_text(self, file):
-        """
-        Extract text from a PDF file.
-        """
+    def parse(self, file_path: str | Path) -> ParsedDocument:
+
+        file_path = Path(file_path)
+
         try:
-            pdf_reader = PyPDF2.PdfReader(file)
-            text = ""
-            for page in pdf_reader.pages:
-                text += page.extract_text() + "\n"
-            return text.strip()
+            with fitz.open(file_path) as document:
+
+                pages = []
+                full_text_parts = []
+
+                for page in document:
+                    page_text = page.get_text("text") or ""
+
+                    pages.append(page_text)
+                    full_text_parts.append(page_text)
+
+                metadata = {
+                    "filename": file_path.name,
+                    "file_type": "pdf",
+                    "num_pages": len(pages),
+                    "parsed_at": timezone.now().isoformat(),
+                }
+
+                return ParsedDocument(
+                    text="\n".join(full_text_parts).strip(),
+                    pages=pages,
+                    metadata=metadata,
+                )
+
         except Exception as e:
-            raise Exception(f"Error extracting PDF text: {str(e)}")
+            raise ParserError(
+                f"Failed to parse PDF: {file_path}"
+            ) from e

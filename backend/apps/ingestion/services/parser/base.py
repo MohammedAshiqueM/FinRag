@@ -9,7 +9,7 @@ class BaseParser(ABC):
     the `extract_text` method.
     """
     @abstractmethod
-    def extract_text(self, file: str) -> str:
+    def parse(self, file: str) -> str:
         """
         Extract text from a document file.
         
