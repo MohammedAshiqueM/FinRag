@@ -1,6 +1,6 @@
 from pathlib import Path
 
-import fitz
+import pymupdf
 from django.utils import timezone
 
 from backend.apps.ingestion.services.parser.parsed_document import ParsedDocument
@@ -18,7 +18,7 @@ class PDFParser(BaseParser):
         file_path = Path(file_path)
 
         try:
-            with fitz.open(file_path) as document:
+            with pymupdf.open(file_path) as document:
 
                 pages = []
                 full_text_parts = []

@@ -1,4 +1,4 @@
-from backend.apps.vectorstore.chroma import ChromaVectorStore
+from backend.apps.ai.vectorstore.chroma import ChromaVectorStore
 from backend.finrag import settings
 
 
