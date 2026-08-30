@@ -3,7 +3,7 @@ from pathlib import Path
 import fitz
 from django.utils import timezone
 
-from backend.apps.ingestion.services.parser import ParsedDocument
+from backend.apps.ingestion.services.parser.parsed_document import ParsedDocument
 from backend.apps.ingestion.services.parser.base import BaseParser
 from backend.apps.ingestion.services.parser.exceptions import ParserError
 

@@ -1,4 +1,7 @@
 from abc import ABC, abstractmethod
+from pathlib import Path
+from backend.apps.ingestion.services.parser.parsed_document import ParsedDocument
+
 
 
 class BaseParser(ABC):
@@ -9,7 +12,7 @@ class BaseParser(ABC):
     the `extract_text` method.
     """
     @abstractmethod
-    def parse(self, file: str) -> str:
+    def parse(self, file_path: str | Path) -> ParsedDocument:
         """
         Extract text from a document file.
         

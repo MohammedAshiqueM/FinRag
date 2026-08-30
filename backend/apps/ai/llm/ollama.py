@@ -1,5 +1,5 @@
 from backend.apps.ai.llm.base import BaseLLM
-import backend.apps.ai.llm.ollama as ollama
+import ollama
 
 
 class OllamaLLM(BaseLLM):

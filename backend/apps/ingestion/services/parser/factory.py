@@ -1,4 +1,4 @@
-from backend.apps.ingestion.services.parser.PDFparser import PDFParser
+from backend.apps.ingestion.services.parser.pdf_parser import PDFParser
 
 PARSERS = {
     "pdf": PDFParser,
