@@ -6,3 +6,4 @@ from typing import Any
 class Chunk:
     text: str
     metadata: dict[str, Any]
+    id: str | None = None
