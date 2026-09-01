@@ -9,7 +9,7 @@ class BaseEmbedding(ABC):
     must implement the `embed()` method as defined here.
     """
     @abstractmethod
-    def embed(self, texts:list[str]) -> list[list[float]]:
+    def embed_chunks(self, texts:list[str]) -> list[list[float]]:
         """
         Convert a list of texts into embeddings (vectors).
         
@@ -18,5 +18,12 @@ class BaseEmbedding(ABC):
             
         Returns:
             List of embeddings, where each embedding is a list of floats
+        """
+        pass
+    
+    @abstractmethod
+    def embed_query(self, query: str) -> list[float]:
+        """
+        Convert user query into embeddings
         """
         pass

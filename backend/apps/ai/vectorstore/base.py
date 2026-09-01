@@ -1,6 +1,5 @@
 from abc import ABC, abstractmethod
-from ast import Dict
-from typing import Any
+from typing import Any, Dict
 
 
 
@@ -16,6 +15,7 @@ class BaseVectorStore(ABC):
             self,
             documents: list[str],
             metadatas: list[Dict[str, Any]],
+            embeddings: list[list[float]],
             ids: list[str] | None = None
             ) -> None:
         """Add documents to the vector store."""

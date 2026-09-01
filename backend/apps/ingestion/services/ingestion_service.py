@@ -2,6 +2,18 @@ from pathlib import Path
 
 
 class IngestionService:
+    """
+    High-level ingestion pipeline that orchestrates all ingestion steps.
+
+    Workflow:
+        1. Parse the document into raw text and pages.
+        2. Clean the extracted text.
+        3. Chunk the cleaned text into smaller segments.
+        4. Enrich each chunk with metadata.
+
+    Returns:
+        A list of enriched chunks ready for downstream processing (e.g., embedding, storage).
+    """
 
     def __init__(
         self,

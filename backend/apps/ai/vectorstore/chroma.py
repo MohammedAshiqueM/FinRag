@@ -2,7 +2,7 @@ from pathlib import Path
 from unittest import result
 
 import chromadb
-from backend.apps.vectorstore.base import BaseVectorStore
+from backend.apps.ai.vectorstore.base import BaseVectorStore
 
 CHROMA_DB_PATH = Path(__file__).parent.parent / "chroma_db"
 
@@ -24,11 +24,12 @@ class ChromaVectorStore(BaseVectorStore):
             name="financial_documents"
         )
         
-    def add_documents(self, documents, metadatas, ids):
+    def add_documents(self, documents, metadatas, ids, embeddings):
         """Add documents with metadata to the collection."""
         self.collection.add(
             documents=documents,
             metadatas=metadatas,
+            embeddings=embeddings,
             ids=ids
         )
     
