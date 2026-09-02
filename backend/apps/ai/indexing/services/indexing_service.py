@@ -5,7 +5,10 @@ from backend.apps.ai.embedding.service import EmbeddingService
 
 
 class IndexingService:
-
+    """
+    Service layer responsible for embedding text chunks and indexing them
+    into a vector store for similarity search and retrieval.
+    """
     def __init__(
         self,
         embedding_service=None,
