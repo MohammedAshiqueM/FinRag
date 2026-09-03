@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from typing import Any, Dict
+from backend.apps.ai.vectorstore.retrieved_chunks import RetrievedChunk
 
 
 
@@ -27,7 +28,7 @@ class BaseVectorStore(ABC):
         query_embedding: list[float],
         k: int = 5,
         filters: dict | None = None
-        ) -> dict:
+        ) -> list[RetrievedChunk]:
         """Search for similar documents."""
         pass
     

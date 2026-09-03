@@ -1,6 +1,7 @@
 from pathlib import Path
 from unittest import result
 
+from backend.apps.ai.vectorstore.retrieved_chunks import RetrievedChunk
 import chromadb
 from backend.apps.ai.vectorstore.base import BaseVectorStore
 
@@ -33,15 +34,32 @@ class ChromaVectorStore(BaseVectorStore):
             ids=ids
         )
     
-    def similarity_search(self, query_embedding, k=5, filters=None):
-        """Perform similarity search."""
+    def similarity_search(
+        self,
+        query_embedding,
+        k=5,
+        filters=None
+    ) -> list[RetrievedChunk]:
+
         result = self.collection.query(
             query_embeddings=[query_embedding],
-            n_result=k,
+            n_results=k,
             where=filters
         )
-        
-        return result
+
+        retrieved_chunks = []
+
+        for i in range(len(result["ids"][0])):
+            retrieved_chunks.append(
+                RetrievedChunk(
+                    id=result["ids"][0][i],
+                    text=result["documents"][0][i],
+                    metadata=result["metadatas"][0][i],
+                    score=result["distances"][0][i],
+                )
+            )
+
+        return retrieved_chunks
     
     def delete_documents(self, filters):
         """Delete documents matching the filters."""
