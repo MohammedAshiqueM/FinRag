@@ -1,5 +1,5 @@
 
-from backend.apps.retrieval.services.retrieval_services import RetrievalService
+from backend.apps.retrieval.services.semantic_retrieval_services import RetrievalService
 from backend.apps.ai.vectorstore.retrieved_chunks import RetrievedChunk
 
 

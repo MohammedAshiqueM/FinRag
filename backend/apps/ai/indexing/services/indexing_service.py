@@ -1,6 +1,7 @@
+from backend.apps.ai.keyword.factory import get_keyword_retriever
 from backend.apps.ai.vectorstore.factory import get_vector_store_service
 from backend.apps.ingestion.services.chunker.parsed_chunk import Chunk
-from backend.apps.ai.embedding.service import EmbeddingService
+from backend.apps.ai.embedding.embedding_service import EmbeddingService
 
 
 
@@ -13,6 +14,7 @@ class IndexingService:
         self,
         embedding_service=None,
         vector_store=None,
+        keyword_service=None,
     ):
         self.embedding_service = (
             embedding_service or EmbeddingService()
@@ -21,6 +23,11 @@ class IndexingService:
         self.vector_store = (
             vector_store or get_vector_store_service()
         )
+        
+        self.keyword_service = (
+            keyword_service or get_keyword_retriever()
+        )
+        
 
     def index(
         self,
@@ -43,3 +50,5 @@ class IndexingService:
             embeddings=embeddings,
             metadatas=[chunk.metadata for chunk in chunks],
         )
+        
+        self.keyword_service.index(chunks)

@@ -9,6 +9,14 @@ class RetrievalService:
         embedding_service: Abstract embedding service used to generate query embeddings.
         vector_store: Abstract vector storage layer that supports similarity search operations.
     """
+    
+    def __init__(
+        self,
+        embedding_service,
+        vector_store,
+    ):
+        self.embedding_service = embedding_service
+        self.vector_store = vector_store
 
     def retrieve(
         self,

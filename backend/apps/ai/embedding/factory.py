@@ -1,4 +1,4 @@
-from backend.apps.ai.embedding.sentence_transformer import SentenceTransformerEmbedding
+from backend.apps.ai.embedding.embedding_providers.sentence_transformer import SentenceTransformerEmbedding
 from backend.finrag.settings import EMBEDDING_PROVIDER
 
 
